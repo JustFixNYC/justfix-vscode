@@ -2,25 +2,42 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "justfix-vscode" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('justfix-vscode.helloWorld', () => {
+function registerSelectionTransformerCommand(id: string, transformer: (selection: string) => string) {
+	let disposable = vscode.commands.registerCommand(id, () => {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from justfix-vscode!');
+		const editor = vscode.window.activeTextEditor;
+
+		if (!editor) { return; }
+
+		const sel = editor.selection;
+		const text = editor.document.getText(sel);
+
+		editor.edit(editBuilder => {
+			editBuilder.replace(sel, transformer(text));
+		});
 	});
 
-	context.subscriptions.push(disposable);
+	return disposable;
+}
+
+// this method is called when your extension is activated
+// your extension is activated the very first time the command is executed
+export function activate(context: vscode.ExtensionContext) {
+	context.subscriptions.push(
+		registerSelectionTransformerCommand('justfix-vscode.wrapJsxAttrInLingui', (text) => {
+			const textWithoutQuotes = text.substring(1, text.length - 1);
+			return "{li18n._(t`" + textWithoutQuotes + "`)}";
+		})
+	);
+
+	context.subscriptions.push(
+		registerSelectionTransformerCommand('justfix-vscode.wrapJsxInTrans', (text) => {
+			const textWithoutQuotes = text.substring(1, text.length - 1);
+			return "<Trans>" + text + "</Trans>";
+		})
+	);
 }
 
 // this method is called when your extension is deactivated

@@ -1,8 +1,13 @@
 {
 	"name": "justfix-vscode",
 	"displayName": "justfix-vscode",
+	"publisher": "justfixnyc",
 	"description": "Extension to make developing on JustFix.nyc projects in VSCode easier.",
 	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+	  	"url": "git+https://github.com/justfixnyc/justfix-vscode.git"
+	},
 	"engines": {
 		"vscode": "^1.46.0"
 	},
@@ -10,14 +15,19 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:justfix-vscode.helloWorld"
+		"onCommand:justfix-vscode.wrapJsxAttrInLingui",
+		"onCommand:justfix-vscode.wrapJsxInTrans"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "justfix-vscode.helloWorld",
-                "title": "Hello World"
+				"command": "justfix-vscode.wrapJsxAttrInLingui",
+                "title": "Wrap JSX attribute in Lingui i18n"
+			},
+			{
+				"command": "justfix-vscode.wrapJsxInTrans",
+                "title": "Wrap JSX in Lingui <Trans> element"
 			}
 		]
 	},
