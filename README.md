@@ -13,6 +13,7 @@ npm install -g vsce
 Then, from the root of this repository, run:
 
 ```
+yarn
 vsce package
 ```
 
