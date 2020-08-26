@@ -20,7 +20,7 @@ vsce package
 Then run:
 
 ```
-code --install-extension justfix-vscode-0.0.1.vsix
+code --install-extension justfix-vscode-0.0.2.vsix
 ```
 
 If you're already running VS Code, you'll probably want to run the
@@ -46,6 +46,12 @@ so you'll have to do that part yourself.
 
 ## Release Notes
 
-### 0.0.1
+### 0.0.2 - 2020-08-26
+
+Added `extensionKind` to `package.json` specifying that the extension
+can be installed globally (i.e., does not have to be re-installed every time
+a development container is rebuilt).
+
+### 0.0.1 - 2020-06-15
 
 Initial release.

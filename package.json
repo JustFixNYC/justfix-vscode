@@ -3,7 +3,7 @@
 	"displayName": "justfix-vscode",
 	"publisher": "justfixnyc",
 	"description": "Extension to make developing on JustFix.nyc projects in VSCode easier.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"repository": {
 		"type": "git",
 	  	"url": "git+https://github.com/justfixnyc/justfix-vscode.git"
@@ -19,6 +19,10 @@
 		"onCommand:justfix-vscode.wrapJsxInTrans"
 	],
 	"main": "./out/extension.js",
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
 	"contributes": {
 		"commands": [
 			{
